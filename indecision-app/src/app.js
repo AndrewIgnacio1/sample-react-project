@@ -24,15 +24,30 @@ const onFormSubmit = (e) => {
     renderIndecisionApp();
 };
 
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const selectedOption = app.options[randomNum];
+    alert(selectedOption);
+}
+
+const onRemoveAll = () => {
+    app.options = [];
+    renderIndecisionApp();
+}
+
 const renderIndecisionApp = () => {
     const template = (
         <div>
             <h1>{app.title}</h1>
             {app.subtitle && <p>{app.subtitle}</p>}
             {app.options.length > 0 ? 'Here are your options' : 'No options'}
-            <ol>{
-                app.options.map(option => <li key={option}>{option}</li>)
-            }</ol>
+            {app.options.length > 0 && <button onClick={onMakeDecision}>What should I do?</button>}
+            {app.options.length > 0 && <button onClick={onRemoveAll}>Remove All</button>}
+            <ol>
+                {
+                    app.options.map(option => <li key={option}>{option}</li>)
+                }
+            </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option" />
                 <button>Add Option</button>
