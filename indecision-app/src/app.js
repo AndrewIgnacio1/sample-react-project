@@ -41,6 +41,10 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll - this.handleRemoveAll.bind(this);
+    }
     handleRemoveAll() {
         alert('Remove All');
     }
@@ -88,3 +92,5 @@ class AddOption extends React.Component {
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+
+// You lose "this" binding in event handlers. You can fix this by using bind
