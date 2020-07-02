@@ -6,8 +6,7 @@ console.log('App.js is running!');
 const app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer',
-    options: [
-    ]
+    options: []
 }
 
 // preventDefault stops it from doing a full page refresh
