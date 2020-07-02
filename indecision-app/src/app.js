@@ -6,7 +6,7 @@ class IndecisionApp extends React.Component {
         return (
             <div>
                 <Header title={title} subtitle={subtitle} />
-                <Action />
+                <Action options={options} />
                 <Options options={options} />
                 <AddOption />
             </div>
@@ -26,18 +26,34 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+    handlePick() {
+        const randomNum = Math.floor(Math.random() * this.props.options.length);
+        const selectedOption = this.props.options[randomNum];
+        alert(selectedOption);
+    }
     render() {
         return (
             <div>
-                <button>What should I do?</button>
+                <button onClick={this.handlePick}>What should I do?</button>
             </div>
         )
     }
 }
 
 class Options extends React.Component {
+    handleRemoveAll() {
+        alert('Remove All');
+    }
     render() {
-        return this.props.options.map(option => <Option option={option} />)
+        return (
+            <div>
+                <button onClick={this.handleRemoveAll}>Remove All</button>
+                {
+                    this.props.options.map(option => <Option option={option} />)
+                }
+            </div>
+            
+        )
     }
 }
 
@@ -50,11 +66,22 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+    handleAddOption(e) {
+        e.preventDefault();
+    
+        const option = e.target.elements.option.value.trim();
+    
+        if (option) {
+            alert('Add Option');
+        }
+    };
     render() {
         return (
             <div>
-                <input type='text' name='option' />
-                <button>Add Option</button>
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option" />
+                    <button>Add Option</button>
+                </form>
             </div>
         )
     }
