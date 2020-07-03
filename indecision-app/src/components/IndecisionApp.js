@@ -8,7 +8,7 @@ import Header from './Header';
 export default class IndecisionApp extends React.Component {
   state = {
     options: []
-  }
+  };
   componentDidMount() {
     //fetching data here. Refreshing page will not remove data.
     try {
@@ -20,14 +20,14 @@ export default class IndecisionApp extends React.Component {
     } catch (error) {
       // Do nothing when no valid value
     }
-  }
+  };
   componentDidUpdate(prevProps, prevState) {
     //saving data here
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
     }
-  }
+  };
   handleAddOption = (option) => {
     if (!option) {
       return 'Enter valid value to add item';
@@ -35,20 +35,20 @@ export default class IndecisionApp extends React.Component {
       return 'This option already exist';
     }
     this.setState((prevState) => ({options: prevState.options.concat([option])}))
-  }
+  };
   handleDeleteOptions = () => {
     this.setState(() => ({options: []}))
-  }
+  };
   handleDeleteOption = (optionToRemove) => {
     this.setState((prevState) => ({
       options: prevState.options.filter((option) => optionToRemove !== option)
     }))
-  }
+  };
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const selectedOption = this.state.options[randomNum];
     alert(selectedOption);
-  }
+  };
   render() {
     const title = 'Indecision App';
     const subtitle = 'Put your life in the hands of a computer.';
