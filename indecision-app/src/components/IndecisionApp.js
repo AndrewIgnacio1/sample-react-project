@@ -4,10 +4,12 @@ import AddOption from './AddOption';
 import Options from './Options';
 import Action from './Action';
 import Header from './Header';
+import OptionModal from './OptionModal';
 
 export default class IndecisionApp extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined
   };
   componentDidMount() {
     //fetching data here. Refreshing page will not remove data.
@@ -39,6 +41,9 @@ export default class IndecisionApp extends React.Component {
   handleDeleteOptions = () => {
     this.setState(() => ({options: []}))
   };
+  handleClearOption = () => {
+    this.setState(() => ({selectedOption: undefined}))
+  }
   handleDeleteOption = (optionToRemove) => {
     this.setState((prevState) => ({
       options: prevState.options.filter((option) => optionToRemove !== option)
@@ -47,7 +52,9 @@ export default class IndecisionApp extends React.Component {
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const selectedOption = this.state.options[randomNum];
-    alert(selectedOption);
+    this.setState((prevState) => ({
+      selectedOption: selectedOption
+    }))
   };
   render() {
     const title = 'Indecision App';
@@ -65,6 +72,10 @@ export default class IndecisionApp extends React.Component {
           handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption handleAddOption={this.handleAddOption} />
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          handleClearOption={this.handleClearOption}
+        />
       </div>
     )
   }
